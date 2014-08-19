@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="uk-grid">
+        <div class="uk-width-medium-1-1">
+            <ul class="uk-width-1-2 uk-container uk-container-center">
+                {% for championship in championship_list %}
+                    <li><a href="{% url 'championship.detail' championship.id %}">{{ championship }}</a></li>
+                {% empty %}
+                    No championships have been created yet.
+                {% endfor %}
+            </ul>
+            {% include "includes/_pagination.html" %}
+        </div>
+    </div>
+{% endblock %}

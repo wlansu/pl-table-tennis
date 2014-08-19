@@ -1,0 +1,2 @@
+-e git+https://github.com/nwcell/psycopg2-windows.git@win64-py34#egg=psycopg2
+https://www.djangoproject.com/download/1.7.b4/tarball/

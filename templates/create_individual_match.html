@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block extra-head %}
+    <script src="{% static 'js/addons/datepicker.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+    <div class="uk-article-divider"></div>
+    <div class="uk-grid">
+        <div class="uk-width-1-1">
+            <form class="uk-form uk-form-horizontal uk-width-1-2 uk-container-center" action="" method="post">{% csrf_token %}
+                {% if form.non_field_errors %}
+                    <div class="uk-alert uk-alert-danger" data-uk-alert>
+                        {{ form.non_field_errors }}
+                    </div>
+                {% endif %}
+                {% for field in form %}
+                    {% if field.id_for_label == form.date_played.id_for_label %}
+                        <div class="uk-form-row">
+                            {% for error in form.date_played.errors %}
+                                <span class="uk-alert-danger uk-float-right">{{ error }}</span>
+                            {% endfor %}
+                            <label class="uk-form-label"
+                                   for="{{ form.date_played.id_for_label }}">{{ form.date_played.label }}</label>
+
+                            <div class="uk-form-controls">
+                                <input id="{{ form.date_played.id_for_label }}"
+                                        {% if form.errors %}
+                                       class="{% if field.errors %}uk-form-danger{% else %}uk-form-success{% endif %}"
+                                        {% endif %}
+                                       name="{{ form.date_played.html_name }}" type="text"
+                                       value="{{ form.date_played.value }}"
+                                       data-uk-datepicker="{format:'DD-MM-YYYY'}">
+                            </div>
+                        </div>
+                    {% else %}
+                        {% include "includes/_form_fields.html" %}
+                    {% endif %}
+                {% endfor %}
+                <div class="uk-form-row">
+                <input class="uk-button" type="submit" value="Submit">
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

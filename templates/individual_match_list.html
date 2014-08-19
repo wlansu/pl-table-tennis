@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="uk-grid">
+        <div class="uk-width-medium-1-1">
+            <ul class="uk-width-1-2 uk-container uk-container-center">
+                {% for match in match_list %}
+                    <li><a href="{% url 'individual_match.detail' match.id %}">{{ match }}</a></li>
+                {% empty %}
+                    No matches have been played yet.
+                {% endfor %}
+            </ul>
+            {% include "includes/_pagination.html" %}
+        </div>
+    </div>
+{% endblock %}

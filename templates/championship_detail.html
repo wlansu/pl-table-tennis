@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="uk-grid">
+        <div class="uk-width-1-1">
+            <p class="uk-panel uk-panel-box uk-text-center">
+                Welcome the the Paylogic Championship! <br/>
+                A yearly event where we compete for the Paylogic Trophy Cup. <br/>
+                Here you can see who's playing who in this round.
+            </p>
+        </div>
+    </div>
+    <div class="uk-grid">
+        {% for pairing in view.pairings %}
+            <div class="uk-width-medium-1-3">
+                <div class="uk-panel uk-panel-box">
+                    <a href={% url 'player.detail' pairing.player1.id %}>{{ pairing.player1 }}</a> vs <a
+                        href={% url 'player.detail' pairing.player2.id %}>{{ pairing.player2 }}</a>
+                </div>
+            </div>
+            {% if forloop.counter|divisibleby:"3" %}
+                <div class="uk-width-1-1 uk-article-divider"></div>{% endif %}
+        {% empty %}
+            <form class="uk-form uk-form-width-medium" action="{% url 'championships.pairings' %}"
+                  method="post">{% csrf_token %}
+                <input class="uk-button" type="submit" value="Create pairings">
+            </form>
+        {% endfor %}
+    </div>
+{% endblock content %}
