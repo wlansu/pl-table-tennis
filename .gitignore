@@ -57,3 +57,5 @@ target/
 
 #Pycharm
 .idea/
+
+table_tennis/local_settings.py
