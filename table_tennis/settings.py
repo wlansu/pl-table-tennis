@@ -49,9 +49,9 @@ TEMPLATE_DIRS = (
     os.path.join(BASE_DIR, 'templates/'),
 )
 
-ROOT_URLCONF = 'urls'
+ROOT_URLCONF = 'table_tennis.urls'
 
-WSGI_APPLICATION = 'wsgi.application'
+WSGI_APPLICATION = 'table_tennis.wsgi.application'
 
 # Internationalization
 # https://docs.djangoproject.com/en/dev/topics/i18n/
