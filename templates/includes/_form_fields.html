@@ -1,0 +1,10 @@
+<div class="uk-form-row">
+    {% for error in field.errors %}
+        <span class="uk-alert-danger uk-float-right">{{ error|escape }}</span>
+    {% endfor %}
+    <label class="uk-form-label" for="{{ field.id_for_label }}">{{ field.label }}</label>
+
+    <div class="uk-form-controls">
+        {{ field }}
+    </div>
+</div>

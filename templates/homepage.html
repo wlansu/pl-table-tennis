@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Paylogic Table Tennis League
+{% endblock %}
+
+{% block content %}
+    <h1 class="uk-text-center">Welcome to the Paylogic Table Tennis League.</h1>
+    <div class="uk-grid">
+        <div class="uk-width-medium-1-2">
+            <p class="uk-panel uk-panel-box uk-text-center">
+                Here you can see an overview of all the players and the latest matches that were played. <br/>
+                If you'd like to join the competition just click on "New Player" and soon you too can compete for the
+                cup!
+            </p>
+        </div>
+        <div class="uk-width-medium-1-2">
+            <p class="uk-panel uk-panel-box uk-text-center uk-float-right">
+                The competition is simple. Just find another player who you'd like to challenge and go at it. <br/>
+                Record your match by clicking on "Submit a match" and you're done. Your points and rank will be
+                automatically calculated.
+            </p>
+        </div>
+    </div>
+    <div class="uk-grid">
+    <table class="uk-width-1-2">
+            <caption><h2>The players.</h2></caption>
+            <thead>
+            <tr>
+                <th class="uk-text-center uk-width-1-3">Player name</th>
+                <th class="uk-text-center uk-width-1-3">Player rank</th>
+                <th class="uk-text-center uk-width-1-3">Total points</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for player in view.players %}
+                <tr>
+                    <td class="uk-text-center uk-width-1-3"><a
+                            href="{% url 'player.detail' player.id %}">{{ player.name }}</a></td>
+                    <td class="uk-text-center uk-width-1-3">{{ player.rank|default_if_none:"Unranked" }}</td>
+                    <td class="uk-text-center uk-width-1-3">{{ player.points }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <table class="uk-width-1-2">
+            <caption><h2>The last 10 matches played.</h2></caption>
+            <thead>
+            <tr>
+                <th class="uk-text-center uk-width-1-3">Winner</th>
+                <th class="uk-text-center uk-width-1-3">Opponent</th>
+                <th class="uk-text-center uk-width-1-3">Score</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for match in view.latest_matches %}
+                <tr>
+                    <td class="uk-text-center uk-width-1-3"><a
+                            href="{% url 'player.detail' match.won.id %}">{{ match.won.name }}</a></td>
+                    <td class="uk-text-center uk-width-1-3"><a
+                            href="{% url 'player.detail' match.lost.id %}">{{ match.lost.name }}</a></td>
+                    <td class="uk-text-center uk-width-1-3">{{ match.games_won }} - {{ match.games_lost }}</td>
+                </tr>
+            {% empty %}
+                <tr>
+                    <td class="uk-text-center uk-width-1-3">-</td>
+                    <td class="uk-text-center uk-width-1-3">-</td>
+                    <td class="uk-text-center uk-width-1-3">-</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
+
+{#{% block content %}#}
+{#    <h1>Welcome to the Paylogic Table Tennis League.</h1>#}
+{#    <div ng-controller="PlayerListCtrl">#}
+{#        <h2>These are our players.</h2>#}
+{#        <table>#}
+{#            <thead>#}
+{#            <tr>#}
+{#                <td class="uk-width-1-2">Player name</td>#}
+{#                <td class="uk-width-1-2">Player rank</td>#}
+{#            </tr>#}
+{#            </thead>#}
+{#                <tr ng-repeat="player in players">#}
+{#                    <td class="uk-width-1-2"><a href="{{ player.url }}">{{ player.name }}</a></td>#}
+{#                    <td class="uk-width-1-2">{{ player.rank }}</td>#}
+{#                </tr>#}
+{#        </table>#}
+{#    </div>#}
+{#{% endblock %}#}

@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block title %}
+    {{ player.name }}
+{% endblock %}
+
+{% block content %}
+    <h1>{{ player.name }}</h1>
+    <h2>Rank: {{ player.rank|default_if_none:"Unranked" }}</h2>
+    <h3>Total points: {{ player.points }}</h3>
+    <div class="uk-grid">
+        <div class="uk-width-1-2">
+            <h2>Matches won:</h2>
+            <ul>
+                {% for match in view.matches_won %}
+                    <li><a href="{% url 'individual_match.detail' match.id %}">{{ match }}</a></li>
+                {% empty %}
+                    This player hasn't won any matches yet.
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="uk-width-1-2">
+            <h2>Matches lost:</h2>
+            <ul>
+                {% for match in view.matches_lost %}
+                    <li><a href="{% url 'individual_match.detail' match.id %}">{{ match }}</a></li>
+                {% empty %}
+                    This player hasn't lost any matches yet.
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    <div class="uk-grid-divider"></div>
+    <a href="{% url 'player.update' player.id %}">Sign this player up for a championship.</a>
+{% endblock %}
