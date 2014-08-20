@@ -60,7 +60,7 @@ LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'UTC'
 
-DATE_FORMAT = 'd-j-Y'
+DATE_FORMAT = 'd-m-Y'
 
 DATE_INPUT_FORMATS = (
     '%Y-%m-%d', '%d-%m-%Y', '%m/%d/%Y', '%m/%d/%y',  # '2006-10-25', '25-10-2006', '10/25/2006', '10/25/06'
