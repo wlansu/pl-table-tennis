@@ -80,7 +80,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/dev/howto/static-files/
 
-SECRET_KEY = os.environ.get('SECRET_KEY')
+SECRET_KEY = os.environ.get('SECRET_KEY', '*-t&u2*@dg%nxr15)uno%8&=%8cxrw2z9xdk6##*t^0ti_7-$y')
 
 STATIC_ROOT = 'staticfiles'
 STATIC_URL = '/static/'
@@ -105,6 +105,17 @@ DATABASES = {
         'NAME': 'table_tennis',
     }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'table_tennis',
+#         'USER': 'postgres',
+#         'PASSWORD': 'asdasd',
+#         'HOST': 'localhost',
+#         'PORT': '5432',
+#     }
+# }
 
 DATABASES['default'] = dj_database_url.config()
 
